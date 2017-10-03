@@ -39,7 +39,7 @@ def download_image_media_file_and_store(imoJson):
     image_file_path = 'cdn/' + image_url.replace(azure_blob_url, '')
 
     # 1.01 due to legacy, some image urls are constructed poorly and require the usage of the url rather than id
-    image_dir = image_file_path.split("/")[0]
+    image_dir = image_url.replace(azure_blob_url, '').split("/")[0]
 
     # 1.1 ensure our cdn directory has the media asset folder for id
     if not os.path.isdir('cdn/' + image_dir):
