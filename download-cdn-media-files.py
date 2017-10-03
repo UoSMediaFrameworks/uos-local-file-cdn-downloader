@@ -62,7 +62,7 @@ def download_image_media_file_and_store(imoJson):
 
 
 def download_media_file(url, local_cdn_file_path):
-    print("Downloading media file from {} to local cdn location {}".format(url, local_cdn_file_path))
+    # print("Downloading media file from {} to local cdn location {}".format(url, local_cdn_file_path))
     media_file_download_r = requests.get(url, stream=True)
     media_file_download_r.raise_for_status()
     with open(local_cdn_file_path, 'wb') as rawOutput:
