@@ -3,6 +3,11 @@ import json
 import requests
 import os
 from tqdm import tqdm
+import logging
+
+logging.basicConfig(filename='./download_errors.log', level=logging.ERROR,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logger=logging.getLogger(__name__)
 
 videoIngest = 'ingest-files/video-media-objects-for-download.json'
 imageIngest = 'ingest-files/image-media-objects-for-download.json'
@@ -49,7 +54,11 @@ def download_image_media_file_and_store(imoJson):
     # TODO 3. if file exists compare file sizes
 
     # 4. download to the relative path if need
-    download_media_file(image_url, image_file_path)
+    try:
+        download_media_file(image_url, image_file_path)
+    except Exception as e:
+        logger.error(e)
+        logger.info(imoJson)
 
 
 def download_media_file(url, local_cdn_file_path):
